@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // ลบเครื่องหมาย / ที่อาจจะติดมาตอนท้าย URL ใน Environment Variable
-const baseURL = 'https://desaltdena-backend-production.up.railway.app'.replace(/\/$/, '');
+const baseURL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '');
 const api = axios.create({
     baseURL: baseURL,
     headers: {
