@@ -104,6 +104,7 @@ const Profile = () => {
   };
 
   const genderOptions = ["ชาย", "หญิง", "ไม่ระบุเพศ"];
+  const roleOptions = ["บุคคลทั่วไป", "นักศึกษา", "บุคลากร", "พยาบาล"];
 
   // 🌟 ป้องกันการโชว์เลข 0 ตอนที่กำลังโหลดข้อมูล
   if (isLoading) {
@@ -182,7 +183,20 @@ const Profile = () => {
             </div>
             <div className="pt-2">
               <label className="text-[10px] font-bold text-muted-foreground uppercase ml-1 flex items-center gap-1"><Users className="h-3 w-3" /> ประเภทผู้ใช้ (เปลี่ยนไม่ได้)</label>
-              <div className="mt-1 bg-muted/40 border border-dashed border-border rounded-2xl px-4 py-3 text-sm text-muted-foreground font-semibold uppercase">{profile.user_role}</div>
+              {isEditing ? (
+                <select 
+                  value={editProfile.user_role} 
+                  onChange={(e) => setEditProfile({ ...editProfile, user_role: e.target.value })} 
+                  className="w-full mt-1 bg-secondary/30 border-transparent rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
+                >
+                  <option value="">เลือกประเภทผู้ใช้</option>
+                  {roleOptions.map(role => <option key={role} value={role}>{role}</option>)}
+                </select>
+              ) : (
+                <div className="mt-1 bg-muted/40 border border-dashed border-border rounded-2xl px-4 py-3 text-sm text-muted-foreground font-semibold uppercase">
+                  {profile.user_role || "ยังไม่ได้ระบุ"}
+                </div>
+              )}
             </div>
           </div>
         </div>
