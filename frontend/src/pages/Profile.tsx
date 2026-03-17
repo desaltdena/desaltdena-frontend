@@ -182,7 +182,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="pt-2">
-              <label className="text-[10px] font-bold text-muted-foreground uppercase ml-1 flex items-center gap-1"><Users className="h-3 w-3" /> ประเภทผู้ใช้ (เปลี่ยนไม่ได้)</label>
+              <label className="text-[10px] font-bold text-muted-foreground uppercase ml-1 flex items-center gap-1"><Users className="h-3 w-3" /> ประเภทผู้ใช้</label>
               {isEditing ? (
                 <select 
                   value={editProfile.user_role} 
