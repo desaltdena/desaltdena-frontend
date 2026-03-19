@@ -153,14 +153,14 @@ const Posttest = () => {
     const user = JSON.parse(userData); // ดึงตัวแปร user มาใช้งาน
   
     const now = new Date();
-    const startDate = new Date('2026-03-18T00:00:00'); // แก้เป็น 18 เพื่อทดสอบตามที่คุณต้องการ
+    const startDate = new Date('2026-03-20T00:00:00'); // แก้เป็น 18 เพื่อทดสอบตามที่คุณต้องการ
     const endDate = new Date('2026-03-31T23:59:59');
   
     if (now < startDate) {
       toast({
         variant: "destructive",
         title: "ยังไม่เปิดให้ทำแบบทดสอบ",
-        description: "Post-test จะเริ่มเปิดให้ทำในวันที่ 18 มีนาคม 2569",
+        description: "Post-test จะเริ่มเปิดให้ทำในวันที่ 20 มีนาคม 2569",
       });
       return;
     }
