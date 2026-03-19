@@ -23,10 +23,19 @@ const Dashboard = () => {
   const [chartData, setChartData] = useState<any[]>([]);
 
   // ดึงข้อมูล User
-  const userString = localStorage.getItem("user");
-  const userData = userString ? JSON.parse(userString) : null;
+  // 1. ใช้ useState เก็บ userData เพื่อให้ React ติดตามการเปลี่ยนแปลงได้
+  const [userData, setUserData] = useState<any>(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
 
   useEffect(() => {
+
+    if (!userData) {
+      navigate("/login", { replace: true });
+      return;
+    }
+    
     if (userData && userData.pretest_done === 0) {
       navigate("/pretest", { replace: true });
       return;
@@ -76,14 +85,41 @@ const Dashboard = () => {
     };
     
     fetchWeeklyData();
-  }, [navigate, userData?.user_id]); // ใส่ dependency ป้องกัน warning
+  }, [navigate, userData?.user_id, userData?.pretest_done]); // ใส่ dependency ป้องกัน warning
 
-  if (!userData) {
-    return <Navigate to="/" replace />;
-  }
+  const needsPosttest = (() => {
+      if (!userData || userData.posttest_done !== 0) return false;
+      const now = new Date();
+      const start = new Date('2026-03-18T00:00:00');
+      const end = new Date('2026-03-31T23:59:59');
+      return now >= start && now <= end;
+    })();
+
+  if (!userData) return null;
 
   return (
     <PageLayout>
+
+      {/* 🌟 แสดง Banner แจ้งเตือนถ้าถึงเวลาทำ Post-test */}
+      {needsPosttest && (
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="bg-[hsl(255,60%,65%)] text-white p-4 rounded-2xl mb-6 shadow-lg flex justify-between items-center"
+        >
+          <div>
+            <p className="font-bold">แบบทดสอบหลังเรียนเปิดแล้ว!</p>
+            <p className="text-xs opacity-90">ทำแบบทดสอบเพื่อรับแต้มสะสมเพิ่ม</p>
+          </div>
+          <button 
+            onClick={() => navigate("/posttest")}
+            className="bg-white text-[hsl(255,60%,65%)] px-4 py-2 rounded-xl text-sm font-bold shadow-sm"
+          >
+            ไปทำเลย
+          </button>
+        </motion.div>
+      )}
+      
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
         <div className="px-1">
           <p className="text-xl font-heading font-medium text-muted-foreground">
