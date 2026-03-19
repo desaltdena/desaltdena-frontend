@@ -115,7 +115,7 @@ const Dashboard = () => {
             onClick={() => navigate("/posttest")}
             className="bg-white text-[hsl(20,90%,75%)] px-4 py-2 rounded-xl text-sm font-bold shadow-sm"
           >
-            ไปทำเลย
+            ทำเลย
           </button>
         </motion.div>
       )}
