@@ -436,13 +436,13 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
                 <FileText className="w-5 h-5 mx-auto text-orange-500 mb-1" />
                 <p className="text-[10px] text-muted-foreground uppercase">Pre-test เฉลี่ย</p>
                 <p className="text-xl font-bold">{summaryData.avgPretest}%</p>
-                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.count_pretest} คน)</p>
+                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.countPretest} คน)</p>
               </div>
               <div className="glass-card rounded-2xl p-4 text-center">
                 <CheckCircle className="w-5 h-5 mx-auto text-green-500 mb-1" />
                 <p className="text-[10px] text-muted-foreground uppercase">Post-test เฉลี่ย</p>
                 <p className="text-xl font-bold">{summaryData.avgPosttest}%</p>
-                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.count_posttest} คน)</p>
+                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.countPosttest} คน)</p>
               </div>
             </div>
 
