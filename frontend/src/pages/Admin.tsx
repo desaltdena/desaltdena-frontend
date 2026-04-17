@@ -376,16 +376,6 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
             {/* กรองเวลา & ค้นหาผู้ใช้ */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="glass-card rounded-2xl p-4">
-                <h2 className="text-xs font-semibold mb-3 flex items-center gap-2 text-muted-foreground uppercase tracking-wider"><Filter className="w-4 h-4" />กรองตามช่วงเวลา</h2>
-                <div className="flex flex-wrap gap-2">
-                  {(["7d", "30d", "90d", "all"] as const).map(v => (
-                    <button key={v} onClick={() => setDateRange(v)} className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${dateRange === v ? "bg-primary text-primary-foreground shadow-md" : "bg-accent/30 text-foreground hover:bg-accent/50"}`}>
-                      {v === "7d" ? "7 วัน" : v === "30d" ? "30 วัน" : v === "90d" ? "90 วัน" : "ทั้งหมด"}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="glass-card rounded-2xl p-4">
                 <h2 className="text-xs font-semibold mb-3 flex items-center gap-2 text-muted-foreground uppercase tracking-wider"><Search className="w-4 h-4" />ค้นหาข้อมูลนักศึกษา</h2>
                 <div className="flex gap-2">
                   <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === "Enter" && handleSearch()} placeholder="ค้นหาชื่อหรืออีเมล..." className="flex-1 rounded-xl border border-border bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20" />
@@ -437,18 +427,20 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
             <div className="grid grid-cols-3 gap-4">
               <div className="glass-card rounded-2xl p-4 text-center">
                 <Users className="w-5 h-5 mx-auto text-primary mb-1" />
-                <p className="text-[10px] text-muted-foreground uppercase">ผู้เข้าร่วม</p>
-                <p className="text-xl font-bold">{summaryData.totalUsers}</p>
+                  <p className="text-[10px] text-muted-foreground uppercase">ผู้เข้าร่วมทั้งหมด</p>
+                  <p className="text-xl font-bold">{summaryData.totalUsers} คน</p>
               </div>
               <div className="glass-card rounded-2xl p-4 text-center">
                 <FileText className="w-5 h-5 mx-auto text-orange-500 mb-1" />
                 <p className="text-[10px] text-muted-foreground uppercase">Pre-test เฉลี่ย</p>
                 <p className="text-xl font-bold">{summaryData.avgPretest}%</p>
+                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {d.count_pretest} คน)</p>
               </div>
               <div className="glass-card rounded-2xl p-4 text-center">
                 <CheckCircle className="w-5 h-5 mx-auto text-green-500 mb-1" />
                 <p className="text-[10px] text-muted-foreground uppercase">Post-test เฉลี่ย</p>
                 <p className="text-xl font-bold">{summaryData.avgPosttest}%</p>
+                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {d.count_posttest} คน)</p>
               </div>
             </div>
 
