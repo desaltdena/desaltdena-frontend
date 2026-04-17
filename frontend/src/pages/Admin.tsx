@@ -432,19 +432,24 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
                   <p className="text-[10px] text-muted-foreground uppercase">ผู้เข้าร่วมทั้งหมด</p>
                   <p className="text-xl font-bold">{summaryData.totalUsers} คน</p>
               </div>
-              <div className="glass-card rounded-2xl p-4 text-center">
+            {/* Card อัตราการทำ Pre-test */}
+              <div className="glass-card rounded-2xl p-4 text-center border-b-4 border-orange-500/30">
                 <FileText className="w-5 h-5 mx-auto text-orange-500 mb-1" />
-                <p className="text-[10px] text-muted-foreground uppercase">Pre-test เฉลี่ย</p>
-                <p className="text-xl font-bold">{summaryData.avgPretest}%</p>
-                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.countPretest} คน)</p>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold">อัตราการทำ Pre-test</p>
+                <p className="text-xl font-black text-orange-600">{summaryData.avgPretest}%</p>
+                <p className="text-[9px] text-muted-foreground mt-1 bg-orange-50 rounded-full py-0.5">
+                  ทำแล้ว {summaryData.countPretest} จาก {summaryData.totalUsers} คน
+                </p>
               </div>
-              <div className="glass-card rounded-2xl p-4 text-center">
+            
+              {/* Card อัตราการทำ Post-test */}
+              <div className="glass-card rounded-2xl p-4 text-center border-b-4 border-green-500/30">
                 <CheckCircle className="w-5 h-5 mx-auto text-green-500 mb-1" />
-                <p className="text-[10px] text-muted-foreground uppercase">Post-test เฉลี่ย</p>
-                <p className="text-xl font-bold">{summaryData.avgPosttest}%</p>
-                <p className="text-[9px] text-muted-foreground mt-1">(ทำแล้ว {summaryData.countPosttest} คน)</p>
-              </div>
-            </div>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold">อัตราการทำ Post-test</p>
+                <p className="text-xl font-black text-green-600">{summaryData.avgPosttest}%</p>
+                <p className="text-[9px] text-muted-foreground mt-1 bg-green-50 rounded-full py-0.5">
+                  ทำแล้ว {summaryData.countPosttest} จาก {summaryData.totalUsers} คน
+                </p>
 
             {/* Demographics */}
             <div className="glass-card rounded-2xl p-5">
