@@ -71,6 +71,7 @@ const AdminDashboard = () => {
   const [sodiumTrend, setSodiumTrend] = useState<any[]>([]);
   const [overallCompare, setOverallCompare] = useState<any[]>([]);
   const [pretestPieData, setPretestPieData] = useState<any>({});
+  const [posttestPieData, setPosttestPieData] = useState<any>({});
   
   // User Search & Details
   const [searchQuery, setSearchQuery] = useState("");
@@ -140,12 +141,13 @@ const AdminDashboard = () => {
       const res = await api.get(`/index.php?page=admin&action=summary&user_id=${adminId}&range=${dateRange}`);
       if (res.data.status === "success") {
         const d = res.data.data;
-        setSummaryData({ totalUsers: d.total_users || 0, avgPretest: d.avg_pretest || 0, avgPosttest: d.avg_posttest || 0 });
+        setSummaryData({ totalUsers: d.total_users || 0, avgPretest: d.avg_pretest || 0, avgPosttest: d.avg_posttest || 0, countPretest: d.count_pretest || 0, countPosttest: d.count_posttest || 0 });
         setGenderData(d.gender_data || []);
         setAgeData(d.age_data || []);
         setSodiumTrend(d.sodium_trend || []);
         setOverallCompare(d.overall_compare || []);
         setPretestPieData(d.pretest_pie_data || {});
+        setPosttestPieData(d.posttest_pie_data || {});
       }
     } catch (e) { console.error(e); }
   };
@@ -520,6 +522,26 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
                     <ResponsiveContainer width="100%" height={100}>
                       <PieChart>
                         <Pie data={pretestPieData[`q${i}`]} dataKey="value" outerRadius={35}>
+                          <Cell fill="#22c55e" /> <Cell fill="#ef4444" />
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pie Chart Post-test รายข้อ 1-8 */}
+            <div className="glass-card rounded-2xl p-5">
+              <h2 className="text-base font-semibold mb-6">วิเคราะห์ Post-test รายข้อ (ถูก/ผิด)</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                  <div key={i} className="text-center">
+                    <p className="text-[10px] font-bold mb-1">ข้อ {i}</p>
+                    <ResponsiveContainer width="100%" height={100}>
+                      <PieChart>
+                        <Pie data={posttestPieData[`q${i}`]} dataKey="value" outerRadius={35}>
                           <Cell fill="#22c55e" /> <Cell fill="#ef4444" />
                         </Pie>
                         <Tooltip />
