@@ -65,7 +65,7 @@ const AdminDashboard = () => {
   const adminId = userData.user_id;
 
   // ===== Dashboard State =====
-  const [summaryData, setSummaryData] = useState({ totalUsers: 0, avgPretest: 0, avgPosttest: 0 });
+  const [summaryData, setSummaryData] = useState({ totalUsers: 0, avgPretest: 0, avgPosttest: 0, countPretest: 0, countPosttest: 0 });
   const [genderData, setGenderData] = useState<any[]>([]);
   const [ageData, setAgeData] = useState<any[]>([]);
   const [sodiumTrend, setSodiumTrend] = useState<any[]>([]);
