@@ -679,7 +679,7 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
               {foods.map(food => { // 🌟 1. เปลี่ยนจากวงเล็บโค้ง ( เป็นปีกกาเปิด {
             
                 // 🌟 2. วางตัวแปรไว้ตรงนี้
-                const backendUrl = "https://desaltdena-backend-production.up.railway.app";
+                const backendUrl = "https://sodium-tracking-backend-production.up.railway.app";
                 
                 // 🌟 3. ต้องเติมคำว่า return
                 return (
