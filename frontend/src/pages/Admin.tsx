@@ -612,7 +612,7 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
         
               {/* 3. Dropdown ร้านอาหาร (แสดงเฉพาะเมื่อเลือก โรงเย็น หรือ โรงร้อน) */}
               <AnimatePresence>
-                {selectedLoc && locations.find(l => l.location_id === Number(selectedLoc))?.location_name.match(/โรงเย็น|โรงร้อน/) && (
+                {selectedLoc && (
                   <motion.div 
                     initial={{ opacity: 0, y: -10 }} 
                     animate={{ opacity: 1, y: 0 }}
@@ -670,6 +670,11 @@ const openEditMedHerb = (item: any, mode: 'medicine' | 'herb') => {
                                     {res.restaurant_name}
                                   </button>
                                 ))}
+                              {restaurants.filter(r => Number(r.location_id) === Number(selectedLoc)).length === 0 && (
+                                <div className="px-4 py-3 text-xs text-muted-foreground text-center">
+                                  ไม่มีรายชื่อร้านอาหารในสถานที่นี้
+                                </div>
+                              )}
                             </div>
                           </motion.div>
                         )}
