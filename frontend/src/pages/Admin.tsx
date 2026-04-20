@@ -107,22 +107,27 @@ const AdminDashboard = () => {
     
     // 🌟 เพิ่ม: โหลดข้อมูลที่ต้องใช้เป็น Filter ในหน้าจัดการอาหารด้วย
     if (activeTab === "foods") {
-      fetchFoods();       // โหลดรายการอาหาร
       fetchLocations();   // โหลดชื่อสถานที่มาทำ Chips
       fetchRestaurants(); // โหลดชื่อร้านอาหารมาทำ Dropdown
     }
     
     if (activeTab === "locations") { fetchLocations(); fetchRestaurants(); }
+    
     if (activeTab === "herbs") {
       fetchData("medicines", setMedicines);
       fetchHerbs();
-    };
+    }
+    
     if (activeTab === "users") fetchUsers();
-  }, [activeTab, dateRange]);
+    
+  }, [activeTab]);
 
   useEffect(() => {
-    if (activeTab === "foods") fetchFoods();
-  }, [selectedLoc, selectedRes]);
+    if (activeTab === "foods") {
+      console.log("Fetching foods with:", { selectedLoc, selectedRes });
+      fetchFoods(); 
+    }
+  }, [activeTab, selectedLoc, selectedRes, dateRange]);
 
   // ===== API Calls (เชื่อมกับ admin.php ของคุณ) =====
   const fetchData = async (table: string, setter: Function) => {
